@@ -28,7 +28,7 @@ POSTGRES_PASSWORD=passwort
 POSTGRES_DB=windfarm_db
 ```
 
-# docker-compose.yml
+## docker-compose.yml
 
 Docker-Konfiguration zum Starten der PostgreSQL- und Spark-Container.
 
