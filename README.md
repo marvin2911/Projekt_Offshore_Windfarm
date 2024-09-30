@@ -57,10 +57,10 @@ Jede neue CSV-Datei muss einen eindeutigen Namen haben, um mehrfache Verarbeitun
 
 # Manuelle Erstellung der PostgreSQL-Datenbank und Tabellen
 
-1. **Container starten:**
+1. **PostgreSQL-Container starten:**
 
    ```powershell
-   docker-compose up -d
+   docker-compose up db
    ```
 
 ## 2. In den PostgreSQL-Container einloggen:
@@ -116,6 +116,15 @@ SELECT * FROM temperature_data;
 ```sql
 SELECT * FROM hourly_average_temperatures;
 ```
+
+## 6. Spark-Container starten:
+
+Nachdem die Datenbank und Tabellen erstellt wurden, kannst du die gesamte Anwendung starten:
+
+```powershell
+docker-compose up
+```
+
 
 # Docker
 
