@@ -104,7 +104,6 @@ SELECT * FROM temperature_data;
 ```
 
 ```sql
-Code kopieren
 SELECT * FROM hourly_average_temperatures;
 ```
 
