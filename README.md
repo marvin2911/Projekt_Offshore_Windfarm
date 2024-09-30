@@ -57,10 +57,10 @@ Jede neue CSV-Datei muss einen eindeutigen Namen haben, um mehrfache Verarbeitun
 
 # Manuelle Erstellung der PostgreSQL-Datenbank und Tabellen
 
-1. **PostgreSQL-Container starten:**
+1. **Container starten:**
 
    ```powershell
-   docker-compose up db
+   docker-compose up -d
    ```
 
 ## 2. In den PostgreSQL-Container einloggen:
