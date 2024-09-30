@@ -65,13 +65,6 @@ Führe den folgenden Befehl aus, um den PostgreSQL-Container zu starten:
 docker-compose up db
 ```
 
-
-Verbinde dich mit der Standarddatenbank `postgres`, um die neue Datenbank zu erstellen:
-
-```bash
-docker exec -it <postgres_container_name> psql -U <postgres_user> -d postgres
-```
-
 ## 2. In den PostgreSQL-Container einloggen:
 
 Verbinde dich mit der Standarddatenbank `postgres`, um die neue Datenbank zu erstellen:
