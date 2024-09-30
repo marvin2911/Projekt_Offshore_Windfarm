@@ -62,6 +62,7 @@ Die Datenbank und Tabellen werden nicht automatisch erstellt und müssen manuell
 
    ```powershell
    docker-compose up db
+   ```
 
 ## 2. In den PostgreSQL-Container einloggen:
 
@@ -69,6 +70,7 @@ Verbinde dich mit der Standarddatenbank `postgres`, um die neue Datenbank zu ers
 
 ```bash
 docker exec -it projekt_offshore_windfarm-db-1 psql -U benutzername -d postgres
+```
 
 ## 3. Datenbank erstellen:
 
@@ -76,6 +78,7 @@ Nachdem du dich eingeloggt hast, erstelle die Datenbank `windfarm_db`:
 
 ```sql
 CREATE DATABASE windfarm_db;
+```
 
 ## 4. Tabellen in PostgreSQL erstellen
 
@@ -91,6 +94,7 @@ CREATE TABLE temperature_data (
     timestamp TIMESTAMP NOT NULL,
     temperature NUMERIC NOT NULL
 );
+```
 
 **Für die stündlichen Durchschnittswerte (`hourly_average_temperatures`):**
 
@@ -100,6 +104,7 @@ CREATE TABLE hourly_average_temperatures (
     hour TIMESTAMP NOT NULL,
     avg_temperature NUMERIC NOT NULL
 );
+```
 
 # Docker
 
