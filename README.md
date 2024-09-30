@@ -95,6 +95,19 @@ CREATE TABLE temperature_data (
 );
 ```
 
+## 5. Tabelleninhalt anzeigen:
+
+Um die Daten in den Tabellen anzuzeigen, kannst du die folgenden Befehle verwenden:
+
+```sql
+SELECT * FROM temperature_data;
+```
+
+```sql
+Code kopieren
+SELECT * FROM hourly_average_temperatures;
+```
+
 **Für die stündlichen Durchschnittswerte (`hourly_average_temperatures`):**
 
 ```sql
