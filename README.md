@@ -57,13 +57,8 @@ Jede neue CSV-Datei muss einen eindeutigen Namen haben, um mehrfache Verarbeitun
 
 # Manuelle Erstellung der PostgreSQL-Datenbank und Tabellen
 
-1. **PostgreSQL-Container starten:**
 
-   ```powershell
-   docker-compose up db
-   ```
-
-## 2. In den PostgreSQL-Container einloggen:
+## 1. In den PostgreSQL-Container einloggen:
 
 Verbinde dich mit der Standarddatenbank `postgres`, um die neue Datenbank zu erstellen:
 
@@ -71,7 +66,7 @@ Verbinde dich mit der Standarddatenbank `postgres`, um die neue Datenbank zu ers
 docker exec -it <postgres_container_name> psql -U <postgres_user> -d postgres
 ```
 
-## 3. Datenbank erstellen:
+## 2. Datenbank erstellen:
 
 Nachdem du dich eingeloggt hast, erstelle die Datenbank `windfarm_db`:
 
@@ -79,7 +74,7 @@ Nachdem du dich eingeloggt hast, erstelle die Datenbank `windfarm_db`:
 CREATE DATABASE windfarm_db;
 ```
 
-## 4. Tabellen in PostgreSQL erstellen
+## 3. Tabellen in PostgreSQL erstellen
 
 Nachdem die Datenbank `windfarm_db` erstellt wurde, kannst du die Tabellen anlegen.
 
@@ -105,7 +100,7 @@ CREATE TABLE hourly_average_temperatures (
 );
 ```
 
-## 5. Tabelleninhalt anzeigen:
+## 4. Tabelleninhalt anzeigen:
 
 Um die Daten in den Tabellen anzuzeigen, kannst du die folgenden Befehle verwenden:
 
@@ -117,7 +112,7 @@ SELECT * FROM temperature_data;
 SELECT * FROM hourly_average_temperatures;
 ```
 
-## 6. Spark-Container starten:
+## 5. Spark-Container starten:
 
 Nachdem die Datenbank und Tabellen erstellt wurden, kannst du die gesamte Anwendung starten:
 
@@ -125,6 +120,13 @@ Nachdem die Datenbank und Tabellen erstellt wurden, kannst du die gesamte Anwend
 docker-compose up
 ```
 
+## 7. Spark-Container starten:
+
+Nachdem die Datenbank und Tabellen erstellt wurden, kannst du die gesamte Anwendung starten:
+
+```powershell
+docker-compose up -d
+```
 
 # Docker
 
