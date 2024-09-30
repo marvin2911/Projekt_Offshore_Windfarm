@@ -95,6 +95,16 @@ CREATE TABLE temperature_data (
 );
 ```
 
+**Für die stündlichen Durchschnittswerte (`hourly_average_temperatures`):**
+
+```sql
+CREATE TABLE hourly_average_temperatures (
+    id SERIAL PRIMARY KEY,
+    hour TIMESTAMP NOT NULL,
+    avg_temperature NUMERIC NOT NULL
+);
+```
+
 ## 5. Tabelleninhalt anzeigen:
 
 Um die Daten in den Tabellen anzuzeigen, kannst du die folgenden Befehle verwenden:
@@ -105,16 +115,6 @@ SELECT * FROM temperature_data;
 
 ```sql
 SELECT * FROM hourly_average_temperatures;
-```
-
-**Für die stündlichen Durchschnittswerte (`hourly_average_temperatures`):**
-
-```sql
-CREATE TABLE hourly_average_temperatures (
-    id SERIAL PRIMARY KEY,
-    hour TIMESTAMP NOT NULL,
-    avg_temperature NUMERIC NOT NULL
-);
 ```
 
 # Docker
