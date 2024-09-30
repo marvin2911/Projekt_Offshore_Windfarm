@@ -13,7 +13,7 @@ Beinhaltet Timestamp und Temperaturwerte.
 ## scripts/process_data.py
 
 Python-Skript mit Apache Spark zur:
-- Bereinigung der Daten (Entfernung ungültiger Werte außerhalb von -50°C bis 150°C).
+- Bereinigung der Daten (Entfernung ungültiger Werte außerhalb von -50°C bis 150°C und Nullwerte).
 - Berechnung stündlicher Durchschnittstemperaturen.
 - Speicherung der Daten in die PostgreSQL-Datenbank.
 - Überwacht alle 60 Sekunden das `data`-Verzeichnis auf neue CSV-Dateien.
