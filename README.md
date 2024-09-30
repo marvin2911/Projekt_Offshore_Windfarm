@@ -54,7 +54,6 @@ Jede neue CSV-Datei muss einen eindeutigen Namen haben, um mehrfache Verarbeitun
 - `temperature_data`: Speichert die bereinigten Rohdaten.
 - `hourly_average_temperatures`: Enthält die stündlich aggregierten Durchschnittstemperaturen.
 
-Die Datenbank und Tabellen werden nicht automatisch erstellt und müssen manuell eingerichtet werden.
 
 # Manuelle Erstellung der PostgreSQL-Datenbank und Tabellen
 
@@ -69,7 +68,7 @@ Die Datenbank und Tabellen werden nicht automatisch erstellt und müssen manuell
 Verbinde dich mit der Standarddatenbank `postgres`, um die neue Datenbank zu erstellen:
 
 ```bash
-docker exec -it projekt_offshore_windfarm-db-1 psql -U benutzername -d postgres
+docker exec -it <postgres_container_name> psql -U <postgres_user> -d postgres
 ```
 
 ## 3. Datenbank erstellen:
