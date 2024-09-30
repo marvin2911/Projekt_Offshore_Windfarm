@@ -107,7 +107,15 @@ CREATE TABLE hourly_average_temperatures (
 );
 ```
 
-## 5. Tabelleninhalt anzeigen:
+## 5. Spark-Container starten:
+
+Nachdem die Datenbank und Tabellen erstellt wurden, kannst du die gesamte Anwendung starten:
+
+```powershell
+docker-compose up
+```
+
+## 6. Tabelleninhalt anzeigen:
 
 Um die Daten in den Tabellen anzuzeigen, kannst du die folgenden Befehle verwenden:
 
@@ -119,21 +127,6 @@ SELECT * FROM temperature_data;
 SELECT * FROM hourly_average_temperatures;
 ```
 
-## 6. Spark-Container starten:
-
-Nachdem die Datenbank und Tabellen erstellt wurden, kannst du die gesamte Anwendung starten:
-
-```powershell
-docker-compose up
-```
-
-## 7. Spark-Container starten:
-
-Nachdem die Datenbank und Tabellen erstellt wurden, kannst du die gesamte Anwendung starten:
-
-```powershell
-docker-compose up -d
-```
 
 # Docker
 
