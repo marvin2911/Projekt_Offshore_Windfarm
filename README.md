@@ -3,14 +3,6 @@
 ## Übersicht
 Dieses Projekt verarbeitet Sensordaten von Kabeltemperaturen aus einem Offshore-Windpark. Die Daten werden als CSV-Dateien bereitgestellt und automatisch bereinigt, gefiltert sowie in eine PostgreSQL-Datenbank geladen. Alle 60 Sekunden prüft das Skript auf neue Daten.
 
-## Projektstruktur
-PROJEKT_OFFSHORE_WINDFARM
-├── data
-│   └── windpark_data.csv       # Beispiel-CSV mit Temperaturdaten
-├── scripts
-│   └── process_data.py         # Datenverarbeitungsskript mit Apache Spark
-├── .env                        # Umgebungsvariablen für die Datenbank
-└── docker-compose.yml          # Docker-Setup für PostgreSQL und Spark
 
 # Dateien
 
@@ -26,7 +18,7 @@ Python-Skript mit Apache Spark zur:
 - Speicherung der Daten in die PostgreSQL-Datenbank.
 - Überwacht alle 60 Sekunden das `data`-Verzeichnis auf neue CSV-Dateien.
 
-# .env
+## .env
 
 Enthält die Zugangsdaten für die PostgreSQL-Datenbank:
 
@@ -34,6 +26,7 @@ Enthält die Zugangsdaten für die PostgreSQL-Datenbank:
 POSTGRES_USER=benutzername
 POSTGRES_PASSWORD=passwort
 POSTGRES_DB=windfarm_db
+```
 
 # docker-compose.yml
 
