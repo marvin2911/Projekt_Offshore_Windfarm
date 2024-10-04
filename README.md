@@ -37,8 +37,8 @@ cd offshore-windpark-datenverarbeitung
 Die Datei `.env`, die die PostgreSQL-Zugangsdaten enthält, ist bereits im Projekt enthalten. Falls du die Datenbankzugangsdaten ändern musst, kannst du die Datei entsprechend anpassen:
 
 ```
-POSTGRES_USER=dein_postgres_benutzername
-POSTGRES_PASSWORD=dein_postgres_passwort
+POSTGRES_USER=benutzername
+POSTGRES_PASSWORD=passwort
 POSTGRES_DB=windfarm_db
 ```
 
@@ -47,7 +47,7 @@ POSTGRES_DB=windfarm_db
 Stelle sicher, dass Docker auf deinem System installiert ist, und starte die Dienste mit Docker Compose:
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
 Dies startet:
