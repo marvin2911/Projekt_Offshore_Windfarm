@@ -66,6 +66,8 @@ Beispielverzeichnis für CSV-Dateien:
 ```
 Das Skript prüft regelmäßig auf neue Dateien und verarbeitet sie automatisch.
 
+Hinweis: Achte darauf, dass die CSV-Dateien im Verzeichnis /data unterschiedliche Namen haben, um sicherzustellen, dass sie korrekt verarbeitet werden und keine Datei doppelt verarbeitet wird.
+
 # Funktionsweise
 
 - **Dateierkennung**: Das Skript läuft in einer Endlosschleife und überwacht das Verzeichnis `/data` auf neue CSV-Dateien.
