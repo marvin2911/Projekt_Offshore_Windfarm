@@ -1,159 +1,111 @@
-READ.me ist momentan falsch obwohl Projekt richtig ist
+# Projektübersicht
+In einem Offshore-Windpark werden verschiedene Betriebsparameter überwacht, darunter die Temperaturen von Kabeln. Dieses Projekt konzentriert sich darauf, die bereitgestellten CSV-Dateien zu verarbeiten und diese Temperaturdaten in einer PostgreSQL-Datenbank zu speichern. Das Skript liest die Daten, bereinigt sie und berechnet stündliche Durchschnittswerte, die dann in der Datenbank gespeichert werden.
 
+Das Skript läuft kontinuierlich und überwacht ein Verzeichnis auf neue CSV-Dateien, die in regelmäßigen Abständen von 60 Sekunden verarbeitet werden.
 
-# PROJEKT_OFFSHORE_WINDFARM
+# Funktionen
 
-## Übersicht
-Dieses Projekt verarbeitet Sensordaten von Kabeltemperaturen aus einem Offshore-Windpark. Die Daten werden als CSV-Dateien bereitgestellt und automatisch bereinigt, gefiltert sowie in eine PostgreSQL-Datenbank geladen. Alle 60 Sekunden prüft das Skript auf neue Daten.
+- **Automatisierte CSV-Dateiverarbeitung**: Neue Dateien werden alle 60 Sekunden erkannt und verarbeitet.
+- **Datenbereinigung**: Ungültige Daten (Temperaturen außerhalb des Bereichs von -50°C bis 150°C) werden gefiltert.
+- **Stündliche Durchschnittswerte**: Es werden Durchschnittstemperaturen pro Stunde berechnet.
+- **Datenbankspeicherung**: Die bereinigten und aggregierten Daten werden in PostgreSQL gespeichert.
+- **Automatische Tabellenerstellung**: Falls die erforderlichen Tabellen nicht existieren, erstellt das Skript diese automatisch.
+- **Shell-Umgebung**: Das Skript ist für die Ausführung in der PowerShell oder einer anderen Shell-Umgebung ausgelegt.
 
+# Verwendete Technologien
 
-# Dateien
+- **Docker**: Zur Containerisierung von PostgreSQL und Spark.
+- **Apache Spark**: Zur effizienten Verarbeitung großer Datenmengen.
+- **PostgreSQL**: Die relationale Datenbank, in der die Sensordaten gespeichert werden.
+- **Python**: Zur Implementierung des Datenverarbeitungs-Skripts.
+- **Psycopg2**: Eine Python-Bibliothek zur Verbindung mit PostgreSQL.
+- **PySpark**: Die Python-Schnittstelle für Apache Spark.
 
-## data/windpark_data.csv
+# Einrichtungsanleitung
 
-Beinhaltet Timestamp und Temperaturwerte.
+## 1. Repository klonen
 
-## scripts/process_data.py
+Klone dieses Repository auf deine lokale Maschine:
 
-Python-Skript mit Apache Spark zur:
-- Bereinigung der Daten (Entfernung ungültiger Werte außerhalb von -50°C bis 150°C und Nullwerte).
-- Berechnung stündlicher Durchschnittstemperaturen.
-- Speicherung der Daten in die PostgreSQL-Datenbank.
-- Überwacht alle 60 Sekunden das `data`-Verzeichnis auf neue CSV-Dateien.
+```
+git clone https://github.com/dein-benutzername/offshore-windpark-datenverarbeitung.git
+cd offshore-windpark-datenverarbeitung
+```
 
-## .env
+## 2. Anpassen der Umgebungsvariablen (falls notwendig)
 
-Enthält die Zugangsdaten für die PostgreSQL-Datenbank:
+Die Datei `.env`, die die PostgreSQL-Zugangsdaten enthält, ist bereits im Projekt enthalten. Falls du die Datenbankzugangsdaten ändern musst, kannst du die Datei entsprechend anpassen:
 
-```bash
-POSTGRES_USER=benutzername
-POSTGRES_PASSWORD=passwort
+```
+POSTGRES_USER=dein_postgres_benutzername
+POSTGRES_PASSWORD=dein_postgres_passwort
 POSTGRES_DB=windfarm_db
 ```
 
-## docker-compose.yml
+## 3. Docker Compose starten
 
-Docker-Konfiguration zum Starten der PostgreSQL- und Spark-Container.
+Stelle sicher, dass Docker auf deinem System installiert ist, und starte die Dienste mit Docker Compose:
 
-# Funktionsweise
-
-## Automatisierte Datenverarbeitung:
-
-- Das Skript überwacht das `data`-Verzeichnis und verarbeitet neue CSV-Dateien.
-- Bereinigte Rohdaten werden in die Tabelle `temperature_data` gespeichert.
-- Stündliche Durchschnittswerte werden in `hourly_average_temperatures` abgelegt.
-- Verarbeitete Dateien werden gelöscht, um Duplikate zu vermeiden.
-
-## Wichtiger Hinweis zu CSV-Dateien:
-
-Jede neue CSV-Datei muss einen eindeutigen Namen haben, um mehrfache Verarbeitungen zu verhindern.
-
-# Datenbankstruktur
-
-**Datenbank:** `windfarm_db` (muss manuell erstellt werden).
-
-## Tabellen (manuell zu erstellen):
-
-- `temperature_data`: Speichert die bereinigten Rohdaten.
-- `hourly_average_temperatures`: Enthält die stündlich aggregierten Durchschnittstemperaturen.
-
-
-# Manuelle Erstellung der PostgreSQL-Datenbank und Tabellen
-
-## 1. In den PostgreSQL-Container einloggen:
-
-Führe den folgenden Befehl aus, um den PostgreSQL-Container zu starten:
-
-```bash
-docker-compose up db
 ```
-
-## 2. In den PostgreSQL-Container einloggen:
-
-Verbinde dich mit der Standarddatenbank `postgres`, um die neue Datenbank zu erstellen:
-
-```bash
-docker exec -it <postgres_container_name> psql -U <postgres_user> -d postgres
-```
-
-## 3. Datenbank erstellen:
-
-Nachdem du dich eingeloggt hast, erstelle die Datenbank `windfarm_db`:
-
-```sql
-CREATE DATABASE windfarm_db;
-```
-
-## 4. Tabellen in PostgreSQL erstellen
-
-Nachdem die Datenbank `windfarm_db` erstellt wurde, kannst du die Tabellen anlegen.
-
-### Tabellen erstellen:
-
-**Für die Rohdaten (`temperature_data`):**
-
-```sql
-CREATE TABLE temperature_data (
-    id SERIAL PRIMARY KEY,
-    timestamp TIMESTAMP NOT NULL,
-    temperature NUMERIC NOT NULL
-);
-```
-
-**Für die stündlichen Durchschnittswerte (`hourly_average_temperatures`):**
-
-```sql
-CREATE TABLE hourly_average_temperatures (
-    id SERIAL PRIMARY KEY,
-    hour TIMESTAMP NOT NULL,
-    avg_temperature NUMERIC NOT NULL
-);
-```
-
-## 5. Spark-Container starten:
-
-Nachdem die Datenbank und Tabellen erstellt wurden, kannst du die gesamte Anwendung starten:
-
-```powershell
 docker-compose up
 ```
 
-## 6. Tabelleninhalt anzeigen:
+Dies startet:
 
-Um die Daten in den Tabellen anzuzeigen, kannst du die folgenden Befehle verwenden:
+- Eine **PostgreSQL-Datenbank** auf Port 5432.
+- Eine **Spark-Instanz**, die automatisch das Datenverarbeitungs-Skript ausführt.
 
-```sql
-SELECT * FROM temperature_data;
+## 4. CSV-Dateien hinzufügen
+
+Ein Beispiel für eine CSV-Datei befindet sich bereits im Ordner `/data`. Du kannst weitere CSV-Dateien in dieses Verzeichnis legen, und das Skript wird sie alle 60 Sekunden erkennen und verarbeiten.
+
+Beispielverzeichnis für CSV-Dateien:
+
+```
+./data/
+```
+Das Skript prüft regelmäßig auf neue Dateien und verarbeitet sie automatisch.
+
+# Funktionsweise
+
+- **Dateierkennung**: Das Skript läuft in einer Endlosschleife und überwacht das Verzeichnis `/data` auf neue CSV-Dateien.
+- **Datenverarbeitung**: Sobald eine neue Datei erkannt wird, liest das Skript die Daten in einen Spark-DataFrame ein.
+- **Datenbereinigung**: Datensätze mit fehlenden oder ungültigen Werten werden entfernt. Nur Temperaturen im Bereich von -50°C bis 150°C bleiben bestehen.
+- **Datenaggregation**: Durchschnittstemperaturen werden stündlich berechnet.
+- **Datenbankspeicherung**: Die bereinigten und aggregierten Daten werden in der PostgreSQL-Datenbank gespeichert.
+- **Automatische Tabellenerstellung**: Falls die benötigten Tabellen nicht existieren, werden sie vom Skript automatisch in der Datenbank angelegt.
+
+## Verwendung
+
+- **Skript ausführen**: Das Skript wird automatisch ausgeführt, sobald Docker Compose gestartet wurde. Es überwacht das Verzeichnis `/data` auf neue Dateien und verarbeitet diese.
+  
+- **Dienste stoppen**: Um die Dienste zu stoppen, nutze den Befehl:
+
+```
+docker-compose down
 ```
 
-```sql
-SELECT * FROM hourly_average_temperatures;
-```
+## Datenbankschema
 
+### Tabelle: `temperature_data`
 
-# Docker
+Speichert die rohen Temperaturmessungen.
 
-## PostgreSQL-Container:
-Hält die Datenbank für die Temperaturdaten bereit.
+| Spalte      | Typ        | Beschreibung                          |
+|-------------|------------|----------------------------------------|
+| `id`        | SERIAL     | Primärschlüssel                        |
+| `timestamp` | TIMESTAMP  | Zeitpunkt der Temperaturmessung        |
+| `temperature` | FLOAT    | Temperaturmessung in Grad Celsius      |
 
-## Spark-Container:
-Führt das Skript `process_data.py` zur Datenverarbeitung aus.
+### Tabelle: `hourly_average_temperatures`
 
-## Abhängigkeiten:
-Der Spark-Container startet erst, wenn der PostgreSQL-Container läuft.
+Speichert die stündlich aggregierten Durchschnittstemperaturen.
 
-# Voraussetzungen
-
-- Installation von Docker und Docker Compose.
-- Manuelle Erstellung der PostgreSQL-Datenbank `windfarm_db` sowie der Tabellen `temperature_data` und `hourly_average_temperatures`.
-
-# Datenverarbeitung starten
-
-- Lege die CSV-Dateien im `data`-Verzeichnis ab.
-- Das Skript `process_data.py` prüft alle 60 Sekunden auf neue Dateien.
-- Nach erfolgreicher Verarbeitung wird die Datei gelöscht.
-- Die Daten werden in die PostgreSQL-Datenbank geladen.
-
+| Spalte            | Typ        | Beschreibung                                 |
+|-------------------|------------|---------------------------------------------|
+| `id`              | SERIAL     | Primärschlüssel                             |
+| `hour`            | INT        | Stunde des Tages (0-23)                     |
+| `avg_temperature` | FLOAT      | Durchschnittstemperatur für die Stunde      |
 
 
 
