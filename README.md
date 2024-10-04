@@ -29,7 +29,7 @@ Klone dieses Repository auf deine lokale Maschine:
 
 ```
 git clone https://github.com/marvin2911/Projekt_Offshore_Windfarm.git
-cd offshore-windpark-datenverarbeitung
+cd Projekt_Offshore_Windfarm
 ```
 
 ## 2. Anpassen der Umgebungsvariablen (falls notwendig)
