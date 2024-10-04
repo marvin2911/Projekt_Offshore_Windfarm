@@ -28,7 +28,7 @@ Das Skript läuft kontinuierlich und überwacht ein Verzeichnis auf neue CSV-Dat
 Klone dieses Repository auf deine lokale Maschine:
 
 ```
-git clone https://github.com/dein-benutzername/offshore-windpark-datenverarbeitung.git
+git clone https://github.com/marvin2911/Projekt_Offshore_Windfarm.git
 cd offshore-windpark-datenverarbeitung
 ```
 
